@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: url('/assets/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat SemiBold';
+  src: url('/assets/fonts/Montserrat-SemiBold.woff2') format('woff2');
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+  font-weight: 600;
+}
+
+.text-h1,
+.text-h2,
+.text-body1,
+.text-body3,
+.text-caption2,
+.text-caption4 {
+  font-family: 'Montserrat SemiBold';
+  line-height: normal;
+}
+
+.text-body2,
+.text-caption1,
+.text-caption3 {
+  font-family: 'Montserrat Regular';
+}
+
+.text-h1 {
+  font-size: 1.5rem;
+}
+
+.text-h2 {
+  font-size: 1.25rem;
+}
+
+.text-body1,
+.text-body3 {
+  font-weight: 600;
+}
+
+.text-body1,
+.text-body2 {
+  font-size: 1rem;
+}
+
+.text-body3,
+.text-caption1 {
+  font-size: 0.875rem;
+}
+
+.text-caption2,
+.text-caption3 {
+  font-size: 0.75rem;
+}
+
+.text-caption2,
+.text-caption4 {
+  font-weight: 600;
+}
+
+.text-caption4 {
+  font-size: 0.625rem;
+}
