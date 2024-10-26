@@ -5,3 +5,4 @@ export { default as UToggle } from './UToggle.vue';
 export { default as URadio } from './URadio.vue';
 export { default as UCheckbox } from './UCheckbox.vue';
 export { default as UIcon } from './UIcon.vue';
+export { default as UButton } from './UButton.vue';

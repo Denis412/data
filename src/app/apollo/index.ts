@@ -1,26 +1,45 @@
 import {
   ApolloClientOptions,
+  concat,
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client/core';
 import type { BootFileParams } from '@quasar/app-vite';
+import { setContext } from '@apollo/client/link/context';
 
 export /* async */ function getClientOptions(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   /* {app, router, ...} */ options?: Partial<BootFileParams<any>>
 ) {
   const httpLink = createHttpLink({
-    uri:
-      process.env.GRAPHQL_URI ||
-      // Change to your graphql endpoint.
-      '/graphql',
+    uri: import.meta.env.VITE_API_URL || '/graphql',
   });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('token');
+    const context = { headers: { ...headers } };
+
+    if (token) context.headers.authorization = `Bearer ${token}`;
+    if (!headers?.space)
+      context.headers.space = import.meta.env.VITE_MAIN_SPACE;
+
+    return context;
+  });
+
+  const link = concat(
+    authLink,
+    // ApolloLink.split(
+    //   (operation) => operation.getContext().hasUpload,
+    //   uploadLink,
+    //   httpLink
+    // )
+    httpLink
+  );
 
   return <ApolloClientOptions<unknown>>Object.assign(
     // General options.
     <ApolloClientOptions<unknown>>{
-      link: httpLink,
-
+      link,
       cache: new InMemoryCache(),
     },
 

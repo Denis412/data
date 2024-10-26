@@ -68,6 +68,14 @@ export interface UIconSlots {
 
 export interface UIcon extends ComponentPublicInstance<UIconProps> {}
 
+export interface UButtonProps {}
+
+export interface UButtonSlots {
+  default: () => VNode[];
+}
+
+export interface UButton extends ComponentPublicInstance<UButtonProps> {}
+
 interface _GlobalComponents {
   UDialog: GlobalComponentConstructor<UDialogProps, UDialogSlots>;
   UInput: GlobalComponentConstructor<UInputProps, UInputSlots>;

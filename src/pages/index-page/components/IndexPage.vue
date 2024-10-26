@@ -1,9 +1,15 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <main-table
+    <!-- <main-table
       :items="items"
       :columns="columns"
       @click-body-row-cell="onClickBodyRowCell"
+    /> -->
+
+    <type-objects-select
+      type-name="subject"
+      label-prop="fullname->last_name&first_name&middle_name"
+      body="{ id fullname { first_name middle_name last_name } }"
     />
   </q-page>
 </template>
@@ -12,6 +18,7 @@
 /* eslint-disable */
 
 import { MainTable, TableColumn, CellValue } from '@widgets/table';
+import { TypeObjectsSelect } from '@features/type-objects-select';
 
 defineOptions({
   name: 'IndexPage',

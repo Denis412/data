@@ -8,6 +8,7 @@ import {
   URadio,
   UCheckbox,
   UIcon,
+  UButton,
 } from '@shared';
 
 export default boot(({ app }) => {
@@ -18,4 +19,5 @@ export default boot(({ app }) => {
   app.component('URadio', URadio);
   app.component('UCheckbox', UCheckbox);
   app.component('UIcon', UIcon);
+  app.component('UButton', UButton);
 });

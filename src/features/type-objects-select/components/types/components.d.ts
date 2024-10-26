@@ -4,6 +4,8 @@ import { ComponentPublicInstance, VNode } from 'vue';
 export interface TypeObjectsSelectProps {
   typeName: string;
   system?: boolean;
+  valueProp?: string;
+  labelProp?: string;
   body?: string;
   perPage?: number;
   where?: PaginatorWhere;

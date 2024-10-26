@@ -7,12 +7,17 @@ import type { TypeObjectsSelectProps } from './types';
 import { computed, reactive, ref, watch } from 'vue';
 import { PaginatorInfo, PaginatorPayload } from '@entities/api';
 import { USelectModel } from '@shared/components/types';
+import { getOptionLabel } from '../helpers';
 
 defineOptions({
   name: 'TypeObjectsSelect',
 });
 
-const $props = defineProps<TypeObjectsSelectProps>();
+const $props = withDefaults(defineProps<TypeObjectsSelectProps>(), {
+  valueProp: 'id',
+  labelProp: 'name',
+  body: '{ id name }',
+});
 const $model = defineModel<USelectModel>();
 
 const _typeName = computed(() => $props.typeName);
@@ -50,10 +55,15 @@ typeObjectsQuery?.onResult((queryResult) => {
 
   const paginatorResult =
     queryResult.data[
-      $props.system ? `paginate_${_typeName.value}` : _typeName.value
+      $props.system ? _typeName.value : `paginate_${_typeName.value}`
     ];
 
-  _options.value = paginatorResult?.data ?? [];
+  _options.value = paginatorResult?.data.map((item: any) => ({
+    value: item[$props.valueProp],
+    label: getOptionLabel(item, $props.labelProp),
+    ...item,
+  }));
+
   Object.assign(_paginatorInfo, paginatorResult.paginatorInfo ?? {});
 });
 
