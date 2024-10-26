@@ -68,6 +68,10 @@ export function GetGraphqlBodyPaginateQuery(options: GetGraphqlBodyOptions) {
         paginatorInfo {
           total
           count
+          perPage
+          from
+          to
+          hasMorePages
         }
       }
     }
