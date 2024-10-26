@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { OperationVariables } from '@apollo/client';
 import gql from 'graphql-tag';
 import { apolloClient } from '@boot/apollo';
@@ -7,7 +9,7 @@ import {
   UseMutationOptions,
   useQuery,
 } from '@vue/apollo-composable';
-import { computed, isRef, MaybeRef, ref, unref, watch } from 'vue';
+import { computed, ComputedRef, isRef, MaybeRef, ref, unref, watch } from 'vue';
 import { getGraphqlBody } from '../helpers';
 import {
   UseQueryOptions,
@@ -20,7 +22,10 @@ export default function useGraphqlApi(
   typeName: MaybeRef<string>,
   system: boolean
 ) {
-  function getBody(body: MaybeRef<string>, operationName: string) {
+  function getBody(
+    body: MaybeRef<string> | ComputedRef<string | undefined>,
+    operationName: string
+  ) {
     const _body = ref('');
 
     if (isRef(body)) {
@@ -48,8 +53,8 @@ export default function useGraphqlApi(
     return _body;
   }
 
-  function mutation<TResult, TVariables extends OperationVariables>(
-    body: MaybeRef<string>,
+  function mutation<TResult = any, TVariables extends OperationVariables = any>(
+    body: MaybeRef<string> | ComputedRef<string | undefined>,
     operationName: string,
     options?: UseMutationOptions<TResult, TVariables>
   ) {
@@ -63,8 +68,8 @@ export default function useGraphqlApi(
     return useMutation<TResult, TVariables>(_body, options);
   }
 
-  function query<TResult, TVariables extends OperationVariables>(
-    body: MaybeRef<string>,
+  function query<TResult = any, TVariables extends OperationVariables = any>(
+    body: MaybeRef<string> | ComputedRef<string | undefined>,
     operationName: string,
     variables?: VariablesParameter<TVariables>,
     options?: UseQueryOptions<TResult, TVariables>

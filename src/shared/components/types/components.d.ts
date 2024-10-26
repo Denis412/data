@@ -1,4 +1,4 @@
-import { GlobalComponentConstructor, QDialogProps } from 'quasar';
+import { GlobalComponentConstructor, QDialogProps, QSelectProps } from 'quasar';
 import { ComponentPublicInstance, VNode } from 'vue';
 
 export interface UDialogProps extends QDialogProps {
@@ -28,7 +28,7 @@ export interface UInputSlots {
 
 export interface UInput extends ComponentPublicInstance<UInputProps> {}
 
-export interface USelectProps {}
+export interface USelectProps extends QSelectProps {}
 
 export interface USelectSlots {
   default: () => VNode[];

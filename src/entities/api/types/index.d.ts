@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+export type ApiOperation = 'get' | 'paginate' | 'create' | 'update' | 'delete';
+export type EntityRelationType = 'single' | 'multiple';
+
 export type ApiOperationResult<
   T extends string,
-  K extends 'get' | 'paginate' | 'create' | 'update' | 'delete',
+  K extends ApiOperation,
   S extends boolean,
   R extends Record<string, any>
 > = {
@@ -19,7 +22,7 @@ export interface MutationEntityRelationObject {
   objectId: string;
 }
 
-export type MutationEntityRelation<T extends 'single' | 'multiple'> = {
+export type MutationEntityRelation<T extends EntityRelationType> = {
   [Property: string]: T extends 'single'
     ? MutationEntityRelationObject
     : MutationEntityRelationObject[];
@@ -58,6 +61,12 @@ export interface PaginatorPayload {
 
 export interface PaginatorInfo {
   total: number;
+  count: number;
+  page: number;
+  perPage: number;
+  from: number;
+  to: number;
+  hasMorePages: boolean;
 }
 
 export interface PaginatorResultObject<T> {

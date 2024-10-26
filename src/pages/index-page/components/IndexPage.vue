@@ -1,10 +1,10 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <main-table
+    <!-- <main-table
       :items="items"
       :columns="columns"
       @click-body-row-cell="onClickBodyRowCell"
-    />
+    /> -->
   </q-page>
 </template>
 
@@ -14,7 +14,6 @@
 import { getCellValue } from '@widgets/table';
 import { TableColumn } from '@widgets/table/main-table/types';
 import { CellValue } from '@widgets/table/main-table/helpers/get-cell-value';
-import { createOrder, paginateOrder } from '@entities/order';
 
 defineOptions({
   name: 'IndexPage',
@@ -23,24 +22,6 @@ defineOptions({
 function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   console.log('click', item, value, column);
 }
-
-const r = paginateOrder();
-r?.result.value?.paginate_order.data?.forEach((order) =>
-  order.deals?.forEach((deal) => deal.object.name)
-);
-
-const t = createOrder().mutate({
-  input: {
-    name: 'Order 1',
-    deals: {
-      '54875874358943': [
-        {
-          objectId: '1212121',
-        },
-      ],
-    },
-  },
-});
 
 const columns: TableColumn[] = [
   {

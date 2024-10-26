@@ -1,14 +1,20 @@
 <script setup lang="ts">
-/* TYPES */
-import type { UDialogProps, USelectModel } from './types';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-defineProps<UDialogProps>();
+/* TYPES */
+import type { USelectProps, USelectModel } from './types';
+
+defineOptions({
+  name: 'USelect',
+});
+
+const $props = defineProps<USelectProps>();
 
 const $model = defineModel<USelectModel>();
 </script>
 
 <template>
-  <q-select v-model="$model" />
+  <q-select v-bind="$props" v-model="$model" />
 </template>
 
 <style scoped lang="scss"></style>
