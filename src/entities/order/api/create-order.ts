@@ -7,5 +7,10 @@ export default function createOrder(
   payload?: CreatePayload<OrderCreateInput>,
   body?: MaybeRef<string>
 ) {
-  return createEntity<Order, 'order', OrderCreateInput>('order', payload, body);
+  return createEntity<Order, 'order', false, OrderCreateInput>(
+    'order',
+    false,
+    payload,
+    body
+  );
 }

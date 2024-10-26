@@ -1,4 +1,5 @@
-import { gql, OperationVariables } from '@apollo/client';
+import { OperationVariables } from '@apollo/client';
+import gql from 'graphql-tag';
 import { apolloClient } from '@boot/apollo';
 import {
   provideApolloClient,
@@ -23,14 +24,18 @@ export default function useGraphqlApi(
     const _body = ref('');
 
     if (isRef(body)) {
-      watch(body, (body) => {
-        _body.value = getGraphqlBody({
-          typeName: unref(typeName),
-          system,
-          operationName,
-          body,
-        });
-      });
+      watch(
+        body,
+        (body) => {
+          _body.value = getGraphqlBody({
+            typeName: unref(typeName),
+            system,
+            operationName,
+            body,
+          });
+        },
+        { immediate: true }
+      );
     } else {
       _body.value = getGraphqlBody({
         typeName: unref(typeName),

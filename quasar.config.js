@@ -64,6 +64,8 @@ module.exports = configure(function (/* ctx */) {
         ['@entities']: path.join(__dirname, './src/entities'),
         ['@stores']: path.join(__dirname, './src/stores'),
         ['@shared']: path.join(__dirname, './src/shared'),
+
+        ['@boot']: path.join(__dirname, './src/boot'),
       },
 
       env: require('dotenv').config().parsed,

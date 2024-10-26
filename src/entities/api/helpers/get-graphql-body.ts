@@ -56,7 +56,7 @@ export function GetGraphqlBodyPaginateQuery(options: GetGraphqlBodyOptions) {
   const { typeName, system, body } = options;
 
   return `
-    mutation paginate${capitalize(
+    query paginate${capitalize(
       typeName
     )}($page: Int!, $perPage: Int!, $where: ${
     system ? 'PaginatorWhere' : 'ObjectPaginatorWhere'
@@ -78,7 +78,7 @@ export function GetGraphqlBodyGetQuery(options: GetGraphqlBodyOptions) {
   const { typeName, system, body } = options;
 
   return `
-    mutation get${capitalize(typeName)}($id: String!) {
+    query get${capitalize(typeName)}($id: String!) {
       ${system ? typeName : `get_${typeName}`}(id: $id) {
         ${body ?? 'id'}
       }

@@ -1,7 +1,9 @@
-import type { ApolloClientOptions } from '@apollo/client/core'
-import { createHttpLink } from '@apollo/client/link/http/index.js'
-import { InMemoryCache } from '@apollo/client/cache/index.js'
-import type { BootFileParams } from '@quasar/app-vite'
+import {
+  ApolloClientOptions,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client/core';
+import type { BootFileParams } from '@quasar/app-vite';
 
 export /* async */ function getClientOptions(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
@@ -12,7 +14,7 @@ export /* async */ function getClientOptions(
       process.env.GRAPHQL_URI ||
       // Change to your graphql endpoint.
       '/graphql',
-  })
+  });
 
   return <ApolloClientOptions<unknown>>Object.assign(
     // General options.
@@ -83,5 +85,5 @@ export /* async */ function getClientOptions(
           ssrForceFetchDelay: 100,
         }
       : {}
-  )
+  );
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type ApiOperation<
+export type ApiOperationResult<
   T extends string,
   K extends 'get' | 'paginate' | 'create' | 'update' | 'delete',
   S extends boolean,
@@ -8,7 +8,21 @@ export type ApiOperation<
 > = {
   [Property in T as `${S extends true
     ? `${string & Property}${K extends 'get' | 'paginate' ? '' : Capitalize<K>}`
-    : `${K}_${string & Property}`}`]: R;
+    : `${K}_${string & Property}`}`]: Partial<R>;
+};
+
+export interface EntityRelation<T extends Record<string, any>> {
+  object: Partial<T>;
+}
+
+export interface MutationEntityRelationObject {
+  objectId: string;
+}
+
+export type MutationEntityRelation<T extends 'single' | 'multiple'> = {
+  [Property: string]: T extends 'single'
+    ? MutationEntityRelationObject
+    : MutationEntityRelationObject[];
 };
 
 /* ------------------ PAGINATOR ------------------ */
@@ -47,7 +61,7 @@ export interface PaginatorInfo {
 }
 
 export interface PaginatorResultObject<T> {
-  data: T[];
+  data: Partial<T>[];
   paginatorInfo: PaginatorInfo;
 }
 
@@ -55,7 +69,7 @@ export type PaginatorResult<
   T extends string,
   S extends boolean,
   R extends Record<string, any>
-> = ApiOperation<T, 'paginate', S, PaginatorResultObject<R>>;
+> = ApiOperationResult<T, 'paginate', S, PaginatorResultObject<R>>;
 
 /* ------------------ PAGINATOR ------------------ */
 
@@ -69,7 +83,7 @@ export type GetResult<
   T extends string,
   S extends boolean,
   R extends Record<string, any>
-> = ApiOperation<T, 'get', S, R>;
+> = ApiOperationResult<T, 'get', S, Partial<R>>;
 
 /* -------------------- GET -------------------- */
 
@@ -81,7 +95,7 @@ export interface CreatePayload<I> {
 
 export interface CreateResultObject<T> {
   recordId: string;
-  record: T;
+  record: Partial<T>;
   status: number;
 }
 
@@ -89,7 +103,7 @@ export type CreateResult<
   T extends string,
   S extends boolean,
   R extends Record<string, any>
-> = ApiOperation<T, 'create', S, CreateResultObject<R>>;
+> = ApiOperationResult<T, 'create', S, CreateResultObject<R>>;
 
 /* ------------------ CREATE ------------------ */
 
@@ -101,7 +115,7 @@ export interface UpdatePayload<I> extends CreatePayload<I> {
 
 export interface UpdateResultObject<T> {
   recordId: string;
-  record: T;
+  record: Partial<T>;
   status: number;
 }
 
@@ -109,7 +123,7 @@ export type UpdateResult<
   T extends string,
   S extends boolean,
   R extends Record<string, any>
-> = ApiOperation<T, 'update', S, UpdateResultObject<R>>;
+> = ApiOperationResult<T, 'update', S, UpdateResultObject<R>>;
 
 /* ------------------ UPDATE ------------------ */
 
@@ -117,9 +131,14 @@ export type UpdateResult<
 
 export type DeletePayload = GetPayload;
 
-export interface DeleteResult {
+export interface DeleteResultObject {
   recordId: string;
   status: number;
 }
+
+export type DeleteResult<
+  T extends string,
+  S extends boolean
+> = ApiOperationResult<T, 'delete', S, DeleteResultObject>;
 
 /* ------------------ DELETE ------------------ */
