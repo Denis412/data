@@ -58,14 +58,6 @@ defineExpose({
   </q-dialog>
 </template>
 
-<style>
-/* .u-dialog .q-dialog__inner--minimized > div {
-  max-width: 1024px;
-  min-width: 256px;
-  width: fit-content;
-} */
-</style>
-
 <style scoped lang="scss">
 .u-dialog {
   position: relative;

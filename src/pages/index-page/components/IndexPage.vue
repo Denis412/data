@@ -1,19 +1,17 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <!-- <main-table
+    <main-table
       :items="items"
       :columns="columns"
       @click-body-row-cell="onClickBodyRowCell"
-    /> -->
+    />
   </q-page>
 </template>
 
 <script setup lang="ts">
 /* eslint-disable */
 
-import { getCellValue } from '@widgets/table';
-import { TableColumn } from '@widgets/table/main-table/types';
-import { CellValue } from '@widgets/table/main-table/helpers/get-cell-value';
+import { MainTable, TableColumn, CellValue } from '@widgets/table';
 
 defineOptions({
   name: 'IndexPage',
@@ -363,7 +361,4 @@ const items: any[] = [
     },
   },
 ];
-
-const cellValue = getCellValue(items[0], columns[1]);
-console.log(cellValue);
 </script>

@@ -8,7 +8,11 @@ const $model = defineModel<UInputModel>('');
 </script>
 
 <template>
-  <q-input v-model="$model" />
+  <q-input v-model="$model" class="u-input" />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.u-input {
+  position: relative;
+}
+</style>

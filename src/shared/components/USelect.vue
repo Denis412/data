@@ -14,7 +14,11 @@ const $model = defineModel<USelectModel>();
 </script>
 
 <template>
-  <q-select v-bind="$props" v-model="$model" />
+  <q-select v-bind="$props" v-model="$model" class="u-select" />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.u-select {
+  position: relative;
+}
+</style>

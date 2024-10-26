@@ -36,10 +36,46 @@ export interface USelectSlots {
 
 export interface USelect extends ComponentPublicInstance<USelectProps> {}
 
+export interface UToggleProps {}
+
+export interface UToggleSlots {
+  default: () => VNode[];
+}
+
+export interface UToggle extends ComponentPublicInstance<UToggleProps> {}
+
+export interface URadioProps {}
+
+export interface URadioSlots {
+  default: () => VNode[];
+}
+
+export interface URadio extends ComponentPublicInstance<URadioProps> {}
+
+export interface UCheckboxProps {}
+
+export interface UCheckboxSlots {
+  default: () => VNode[];
+}
+
+export interface UCheckbox extends ComponentPublicInstance<UCheckboxProps> {}
+
+export interface UIconProps {}
+
+export interface UIconSlots {
+  default: () => VNode[];
+}
+
+export interface UIcon extends ComponentPublicInstance<UIconProps> {}
+
 interface _GlobalComponents {
   UDialog: GlobalComponentConstructor<UDialogProps, UDialogSlots>;
   UInput: GlobalComponentConstructor<UInputProps, UInputSlots>;
   USelect: GlobalComponentConstructor<USelectProps, USelectSlots>;
+  UToggle: GlobalComponentConstructor<UToggleProps, UToggleSlots>;
+  URadio: GlobalComponentConstructor<URadioProps, URadioSlots>;
+  UCheckbox: GlobalComponentConstructor<UCheckboxProps, UCheckboxSlots>;
+  UIcon: GlobalComponentConstructor<UIconProps, UIconSlots>;
 }
 
 declare module 'vue' {
