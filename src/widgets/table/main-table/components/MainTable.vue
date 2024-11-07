@@ -4,9 +4,10 @@
 /* TYPES */
 import type { MainTableEmits, MainTableProps } from './types';
 import type { CellValue } from '../helpers';
-import type { TableColumn } from '../types';
+import type { TableColumn, TableTab, TableTabAction } from '../types';
 
 /* COMPONENTS */
+import MainTableTabs from './MainTableTabs.vue';
 import MainTableHeader from './MainTableHeader.vue';
 import MainTableHead from './MainTableHead.vue';
 import MainTableBody from './MainTableBody.vue';
@@ -15,6 +16,14 @@ import MainTableFooter from './MainTableFooter.vue';
 defineProps<MainTableProps>();
 const $emit = defineEmits<MainTableEmits>();
 
+function onClickTab(tab: TableTab) {
+  $emit('clickTab', tab);
+}
+
+function onCLickTabAction(tab: TableTab, action: TableTabAction) {
+  $emit('clickTabAction', tab, action);
+}
+
 function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   $emit('clickBodyRowCell', item, value, column);
 }
@@ -22,20 +31,26 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
 
 <template>
   <div class="main-table">
-    <main-table-header />
+    <main-table-tabs
+      :tabs="tabs"
+      @click-tab="onClickTab"
+      @click-tab-action="onCLickTabAction"
+    />
 
-    <div class="main-table__content">
-      <main-table-head :columns="columns" />
-      <div class="main-table__content-inner">
-        <main-table-body
-          :items="items"
-          :columns="columns"
-          @click-row-cell="onClickBodyRowCell"
-        />
+    <div class="main-table__inner">
+      <main-table-header />
+      <div class="main-table__content">
+        <main-table-head :columns="columns" />
+        <div class="main-table__content-inner">
+          <main-table-body
+            :items="items"
+            :columns="columns"
+            @click-row-cell="onClickBodyRowCell"
+          />
+        </div>
       </div>
+      <main-table-footer />
     </div>
-
-    <main-table-footer />
   </div>
 </template>
 
@@ -56,6 +71,17 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
 
   display: flex;
   flex-direction: column;
+  background: transparent;
+  padding: 0.75rem;
+}
+
+.main-table__inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 1rem;
 }
 
 .main-table__content {

@@ -6,7 +6,9 @@ defineProps<UButtonProps>();
 </script>
 
 <template>
-  <q-btn class="u-button" />
+  <q-btn class="u-button" flat>
+    <slot></slot>
+  </q-btn>
 </template>
 
 <style scoped lang="scss">

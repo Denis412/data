@@ -7,5 +7,6 @@
 <style scoped lang="scss">
 .main-table__header {
   position: relative;
+  padding: 1rem;
 }
 </style>

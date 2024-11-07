@@ -84,6 +84,7 @@ interface _GlobalComponents {
   URadio: GlobalComponentConstructor<URadioProps, URadioSlots>;
   UCheckbox: GlobalComponentConstructor<UCheckboxProps, UCheckboxSlots>;
   UIcon: GlobalComponentConstructor<UIconProps, UIconSlots>;
+  UButton: GlobalComponentConstructor<UButtonProps, UButtonSlots>;
 }
 
 declare module 'vue' {

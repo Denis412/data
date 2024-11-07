@@ -1,24 +1,10 @@
-<template>
-  <q-page class="row items-center justify-evenly">
-    <!-- <main-table
-      :items="items"
-      :columns="columns"
-      @click-body-row-cell="onClickBodyRowCell"
-    /> -->
-
-    <type-objects-select
-      type-name="subject"
-      label-prop="fullname->last_name&first_name&middle_name"
-      body="{ id fullname { first_name middle_name last_name } }"
-    />
-  </q-page>
-</template>
-
 <script setup lang="ts">
 /* eslint-disable */
 
-import { TableColumn, CellValue } from '@widgets/table';
+import { MainTable, TableColumn, CellValue } from '@widgets/table';
 import { TypeObjectsSelect } from '@features/type-objects-select';
+import { TableTab, TableTabAction } from '@widgets/table/main-table/types';
+import { ref } from 'vue';
 
 defineOptions({
   name: 'IndexPage',
@@ -27,6 +13,85 @@ defineOptions({
 function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   console.log('click', item, value, column);
 }
+
+function onClickTab(tab: TableTab) {
+  console.log('click tab', tab);
+}
+
+function onClickTabAction(tab: TableTab, action: TableTabAction) {
+  console.log('click tab action', tab, action);
+}
+
+const tabs = ref<TableTab[]>([
+  {
+    name: 'Tab1',
+    label: 'Таб первый',
+    actions: [
+      {
+        label: 'Действие первое',
+        handler: () => {
+          console.log('click action1');
+        },
+      },
+    ],
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+  {
+    name: 'Tab2',
+    label: 'Таб второй',
+  },
+]);
 
 const columns: TableColumn[] = [
   {
@@ -369,3 +434,28 @@ const items: any[] = [
   },
 ];
 </script>
+
+<template>
+  <q-page class="row items-center justify-evenly index-page">
+    <main-table
+      :items="items"
+      :tabs="tabs"
+      :columns="columns"
+      @click-body-row-cell="onClickBodyRowCell"
+      @click-tab="onClickTab"
+      @click-tab-action="onClickTabAction"
+    />
+
+    <!-- <type-objects-select
+      type-name="subject"
+      label-prop="fullname->last_name&first_name&middle_name"
+      body="{ id fullname { first_name middle_name last_name } }"
+    /> -->
+  </q-page>
+</template>
+
+<style scoped lang="scss">
+.index-page {
+  background-color: lightgray;
+}
+</style>

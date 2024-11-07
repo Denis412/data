@@ -7,5 +7,7 @@
 <style scoped lang="scss">
 .main-table__footer {
   position: relative;
+  padding: 1rem;
+  border-top: 1px solid lightcoral;
 }
 </style>

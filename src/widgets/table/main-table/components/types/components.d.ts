@@ -2,10 +2,11 @@
 
 import { ComponentPublicInstance, VNode } from 'vue';
 import { CellValue } from '../../helpers/get-cell-value';
-import { TableColumn } from '../../types';
+import { TableColumn, TableTab, TableTabAction } from '../../types';
 
 export interface MainTableProps {
   items: any[];
+  tabs: TableTab[];
   columns: TableColumn[];
 }
 
@@ -16,6 +17,8 @@ export interface MainTableEmits {
     value: CellValue,
     column: TableColumn
   ): void;
+  (e: 'clickTab', tab: TableTab): void;
+  (e: 'clickTabAction', tab: TableTab, action: TableTabAction): void;
 }
 
 export interface MainTableSlots {
@@ -23,6 +26,39 @@ export interface MainTableSlots {
 }
 
 export interface MainTable extends ComponentPublicInstance<MainTableProps> {}
+
+export interface MainTableTabsProps {
+  tabs: TableTab[];
+}
+
+export interface MainTableTabsEmits {
+  (e: 'clickTab', tab: TableTab): void;
+  (e: 'clickTabAction', tab: TableTab, action: TableTabAction): void;
+}
+
+export interface MainTableTabsSlots {
+  default: () => VNode[];
+}
+
+export interface MainTableTabs
+  extends ComponentPublicInstance<MainTableTabsProps> {}
+
+export interface MainTableTabItemProps {
+  tab: TableTab;
+}
+
+export interface MainTableTabItemEmits {
+  (e: 'click', tab: TableTab): void;
+  (e: 'clickAction', tab: TableTab, action: TableTabAction): void;
+}
+
+export interface MainTableTabItemSlots {
+  default: () => VNode[];
+  actions: (tab: TableTab) => VNode[];
+}
+
+export interface MainTableTabItem
+  extends ComponentPublicInstance<MainTableTabItemProps> {}
 
 export interface MainTableHeaderProps {}
 
