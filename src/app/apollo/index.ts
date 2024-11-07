@@ -12,7 +12,7 @@ export /* async */ function getClientOptions(
   /* {app, router, ...} */ options?: Partial<BootFileParams<any>>
 ) {
   const httpLink = createHttpLink({
-    uri: import.meta.env.VITE_API_URL || '/graphql',
+    uri: import.meta.env.VITE_GRAPHQL_API_URL || '/graphql',
   });
 
   const authLink = setContext((_, { headers }) => {
