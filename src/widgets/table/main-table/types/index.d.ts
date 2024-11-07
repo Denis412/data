@@ -10,6 +10,7 @@ export interface TableColumn {
 
 export interface TableTabAction {
   icon?: string;
+  color?: string;
   label: string;
   handler: (tab: TableTab, ...args: any[]) => void;
 }

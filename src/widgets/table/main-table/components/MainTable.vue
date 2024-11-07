@@ -32,6 +32,7 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
 <template>
   <div class="main-table">
     <main-table-tabs
+      v-if="tabs?.length"
       :tabs="tabs"
       @click-tab="onClickTab"
       @click-tab-action="onCLickTabAction"

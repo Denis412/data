@@ -37,7 +37,7 @@ function onClickAction(action: TableTabAction) {
     >
       <q-icon name="more_vert" />
 
-      <q-menu>
+      <q-menu class="u-menu">
         <slot name="actions" :tab="tab">
           <q-list tag="ul">
             <q-item
@@ -45,6 +45,7 @@ function onClickAction(action: TableTabAction) {
               :key="action.label"
               tag="li"
               clickable
+              class="u-item flex-center main-table__tabs-item-action"
               @click.stop="onClickAction(action)"
             >
               {{ action.label }}
@@ -70,6 +71,14 @@ function onClickAction(action: TableTabAction) {
   border-radius: 0.25rem;
   font-size: 0.5rem;
   padding-inline: 0.25rem;
+}
+
+.main-table__tabs-item-action {
+  color: $violet-8;
+}
+
+.main-table__tabs-item-action:not(:last-child) {
+  border-bottom: 1px solid $primary-1;
 }
 
 .main-table__tabs-item.active {

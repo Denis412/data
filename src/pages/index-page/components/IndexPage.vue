@@ -33,6 +33,12 @@ const tabs = ref<TableTab[]>([
           console.log('click action1');
         },
       },
+      {
+        label: 'Действие второе',
+        handler: () => {
+          console.log('click action2');
+        },
+      },
     ],
   },
   {

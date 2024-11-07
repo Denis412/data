@@ -53,7 +53,8 @@ function onClickTabAction(tab: TableTab, action: TableTabAction) {
 .main-table__tabs {
   display: flex;
   overflow-x: auto;
-  padding-bottom: 0.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
 
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -8,6 +8,6 @@
 .main-table__footer {
   position: relative;
   padding: 1rem;
-  border-top: 1px solid lightcoral;
+  border-top: 1px solid $primary-1;
 }
 </style>
