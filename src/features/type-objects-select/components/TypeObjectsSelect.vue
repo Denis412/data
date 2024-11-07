@@ -1,12 +1,13 @@
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { computed, reactive, ref, watch } from 'vue';
 
 /* TYPES */
-import { useGraphqlApi } from '@entities/api';
 import type { TypeObjectsSelectProps } from './types';
-import { computed, reactive, ref, watch } from 'vue';
-import { PaginatorInfo, PaginatorPayload } from '@entities/api';
+import type { PaginatorInfo, PaginatorPayload } from '@entities/api';
 import { USelectModel } from '@shared/components/types';
+
+import { useGraphqlApi } from '@entities/api';
 import { getOptionLabel } from '../helpers';
 
 defineOptions({

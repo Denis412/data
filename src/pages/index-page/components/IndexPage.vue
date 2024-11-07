@@ -17,7 +17,7 @@
 <script setup lang="ts">
 /* eslint-disable */
 
-import { MainTable, TableColumn, CellValue } from '@widgets/table';
+import { TableColumn, CellValue } from '@widgets/table';
 import { TypeObjectsSelect } from '@features/type-objects-select';
 
 defineOptions({
