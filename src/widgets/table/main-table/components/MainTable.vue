@@ -41,7 +41,7 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
     <div class="main-table__inner">
       <main-table-header />
       <div class="main-table__content">
-        <main-table-head :columns="columns" />
+        <main-table-head :columns="columns" @sort="$emit('sort', $event)" />
         <div class="main-table__content-inner">
           <main-table-body
             :items="items"

@@ -19,6 +19,7 @@ export interface MainTableEmits {
   ): void;
   (e: 'clickTab', tab: TableTab): void;
   (e: 'clickTabAction', tab: TableTab, action: TableTabAction): void;
+  (e: 'sort', column: TableColumn): void;
 }
 
 export interface MainTableSlots {
@@ -73,12 +74,20 @@ export interface MainTableHeadProps {
   columns: TableColumn[];
 }
 
+export interface MainTableHeadEmits {
+  (e: 'sort', column: TableColumn): void;
+}
+
 export interface MainTableHeadSlots {
   default: () => VNode[];
 }
 
 export interface MainTableHeadRowProps {
   columns: TableColumn[];
+}
+
+export interface MainTableHeadRowEmits {
+  (e: 'sort', column: TableColumn): void;
 }
 
 export interface MainTableHeadRowSlots {
@@ -90,6 +99,10 @@ export interface MainTableHeadRow
 
 export interface MainTableHeadCellProps {
   column: TableColumn;
+}
+
+export interface MainTableHeadCellEmits {
+  (e: 'sort', column: TableColumn): void;
 }
 
 export interface MainTableHeadCellSlots {

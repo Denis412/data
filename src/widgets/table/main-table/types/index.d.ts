@@ -5,6 +5,7 @@ export interface TableColumn {
   label?: string;
   loading?: boolean;
   sortable?: boolean;
+  sortOrder?: 'ASC' | 'DESC';
   children?: TableColumn[];
 }
 

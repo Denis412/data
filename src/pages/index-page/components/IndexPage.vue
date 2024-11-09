@@ -22,6 +22,10 @@ function onClickTabAction(tab: TableTab, action: TableTabAction) {
   console.log('click tab action', tab, action);
 }
 
+function onSort(column: TableColumn) {
+  console.log('sort', column);
+}
+
 const tabs = ref<TableTab[]>([
   {
     name: 'Tab1',
@@ -99,14 +103,16 @@ const tabs = ref<TableTab[]>([
   },
 ]);
 
-const columns: TableColumn[] = [
+const columns = ref<TableColumn[]>([
   {
     name: 'name',
     label: 'Название',
+    sortable: true,
   },
   {
     name: 'team',
     label: 'Команда',
+    sortable: true,
     children: [
       {
         name: 'name',
@@ -117,6 +123,7 @@ const columns: TableColumn[] = [
   {
     name: '',
     label: '',
+    sortable: true,
     children: [
       {
         name: 'name',
@@ -182,7 +189,7 @@ const columns: TableColumn[] = [
       },
     ],
   },
-];
+]);
 
 const items: any[] = [
   {
@@ -450,6 +457,7 @@ const items: any[] = [
       @click-body-row-cell="onClickBodyRowCell"
       @click-tab="onClickTab"
       @click-tab-action="onClickTabAction"
+      @sort="onSort"
     />
 
     <!-- <type-objects-select
