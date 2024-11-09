@@ -46,6 +46,7 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
           <main-table-body
             :items="items"
             :columns="columns"
+            :row-actions="rowActions"
             @click-row-cell="onClickBodyRowCell"
           />
         </div>
@@ -99,5 +100,10 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
 
 .main-table__content-inner {
   overflow: auto;
+}
+
+:deep(.main-table__body-cell-inner) {
+  max-height: 64px;
+  height: 64px;
 }
 </style>

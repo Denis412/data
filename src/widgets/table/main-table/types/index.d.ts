@@ -24,3 +24,9 @@ export interface TableTab {
   actions?: TableTabAction[];
   handler?: (...args: any[]) => void;
 }
+
+export interface TableRowAction {
+  label: string;
+  name?: string;
+  handler?: (tab: TableRowAction, ...args: any[]) => void;
+}

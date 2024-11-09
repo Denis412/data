@@ -15,7 +15,17 @@ const _sortableColumn = ref<TableColumn | undefined>(
 );
 
 function onSort(column: TableColumn) {
-  column.sortOrder = column.sortOrder === 'ASC' ? 'DESC' : 'ASC';
+  switch (column.sortOrder) {
+    case 'ASC':
+      column.sortOrder = 'DESC';
+      break;
+    case 'DESC':
+      column.sortOrder = undefined;
+      break;
+
+    default:
+      column.sortOrder = 'ASC';
+  }
 
   if (_sortableColumn.value && _sortableColumn.value !== column) {
     delete _sortableColumn.value.sortOrder;

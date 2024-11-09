@@ -25,6 +25,7 @@ function onClickRowCell(item: any, value: CellValue, column: TableColumn) {
         :key="item"
         :item="item"
         :columns="columns"
+        :row-actions="rowActions"
         @click-cell="onClickRowCell"
       />
     </tbody>

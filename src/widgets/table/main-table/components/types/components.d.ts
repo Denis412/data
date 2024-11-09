@@ -2,12 +2,18 @@
 
 import { ComponentPublicInstance, VNode } from 'vue';
 import { CellValue } from '../../helpers/get-cell-value';
-import { TableColumn, TableTab, TableTabAction } from '../../types';
+import {
+  TableColumn,
+  TableRowAction,
+  TableTab,
+  TableTabAction,
+} from '../../types';
 
 export interface MainTableProps {
   items: any[];
   tabs: TableTab[];
   columns: TableColumn[];
+  rowActions?: TableRowAction[];
 }
 
 export interface MainTableEmits {
@@ -118,6 +124,7 @@ export interface MainTableHead
 export interface MainTableBodyProps {
   items: any[];
   columns: TableColumn[];
+  rowActions?: TableRowAction[];
 }
 
 export interface MainTableBodyEmits {
@@ -134,6 +141,7 @@ export interface MainTableBody
 export interface MainTableBodyRowProps {
   item: any;
   columns: TableColumn[];
+  rowActions?: TableRowAction[];
 }
 
 export interface MainTableBodyRowEmits {
@@ -150,6 +158,7 @@ export interface MainTableBodyRow
 export interface MainTableBodyCellProps {
   column: TableColumn;
   item: any;
+  rowActions?: TableRowAction[];
 }
 
 export interface MainTableBodyCellEmits {

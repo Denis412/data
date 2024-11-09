@@ -64,9 +64,9 @@ function onClick(value: CellValue) {
 
 <style scoped lang="scss">
 .main-table__cell-content {
+  display: inline-block;
   position: relative;
   cursor: pointer;
-  display: inline-block;
   border-radius: 0.25rem;
 
   transition-duration: 0.3s;
@@ -75,14 +75,30 @@ function onClick(value: CellValue) {
     margin-left: 0.25rem;
   }
 
-  &:hover {
+  & > span {
+    border-radius: 0.25rem;
+    transition-duration: 0.3s;
+  }
+
+  & > span:hover {
     background: var(--head-bg);
     padding-inline: 0.25rem;
   }
 }
 
+.main-table__cell-content:not(
+    .main-table__cell-content > .main-table__cell-array-content
+  ) {
+  overflow: auto;
+}
+
+.main-table__cell-array-content > .main-table__cell-content {
+  overflow: unset !important;
+}
+
 .main-table__cell-array-content {
   position: relative;
+  overflow: auto;
 
   transition-duration: 0.3s;
 

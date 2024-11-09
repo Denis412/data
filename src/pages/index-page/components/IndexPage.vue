@@ -3,7 +3,11 @@
 
 import { MainTable, TableColumn, CellValue } from '@widgets/table';
 import { TypeObjectsSelect } from '@features/type-objects-select';
-import { TableTab, TableTabAction } from '@widgets/table/main-table/types';
+import {
+  TableRowAction,
+  TableTab,
+  TableTabAction,
+} from '@widgets/table/main-table/types';
 import { ref } from 'vue';
 
 defineOptions({
@@ -25,6 +29,13 @@ function onClickTabAction(tab: TableTab, action: TableTabAction) {
 function onSort(column: TableColumn) {
   console.log('sort', column);
 }
+
+const rowActions = ref<TableRowAction[]>([
+  {
+    name: 'action1',
+    label: 'Действие первое',
+  },
+]);
 
 const tabs = ref<TableTab[]>([
   {
@@ -195,7 +206,7 @@ const items: any[] = [
   {
     name: 'Заказ1',
     team: {
-      name: 'Команда1',
+      name: 'Команда1fndsjkdfjdsfjkdk jfdjkfdjfjdsf jkdkj kh jkh jkhjk hjk hkjhkjhjkh jkhjkhjk hkjhjkhjk hjkhkjh jkhjkhkjh kj',
       description: 'Описание',
       review: 'Отзыв',
       deals: [
@@ -454,6 +465,7 @@ const items: any[] = [
       :items="items"
       :tabs="tabs"
       :columns="columns"
+      :row-actions="rowActions"
       @click-body-row-cell="onClickBodyRowCell"
       @click-tab="onClickTab"
       @click-tab-action="onClickTabAction"

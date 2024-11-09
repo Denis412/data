@@ -22,12 +22,58 @@ function onClick(value: CellValue) {
 
 <template>
   <td class="main-table__body-cell">
-    <main-table-body-cell-content :value="_cellValue" @click="onClick" />
+    <div class="main-table__body-cell-inner">
+      <main-table-body-cell-content :value="_cellValue" @click="onClick" />
+
+      <div v-if="rowActions?.length" class="main-table__body-cell-actions">
+        <u-button
+          class="icon-btn cursor-pointer main-table__body-cell-actions-btn"
+        >
+          <q-icon name="more_vert" />
+
+          <q-menu class="u-menu">
+            <slot name="actions">
+              <q-list tag="ul">
+                <q-item
+                  v-for="action in rowActions"
+                  :key="action.name"
+                  tag="li"
+                  clickable
+                  class="u-item"
+                >
+                  {{ action.label }}
+                </q-item>
+              </q-list>
+            </slot>
+          </q-menu>
+        </u-button>
+      </div>
+    </div>
   </td>
 </template>
 
 <style scoped lang="scss">
 .main-table__body-cell {
   position: relative;
+}
+
+.main-table__body-cell-inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+}
+
+.main-table__body-cell-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.main-table__body-cell-actions-btn {
+  font-size: 0.625rem;
 }
 </style>
