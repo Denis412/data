@@ -81,7 +81,8 @@ function onClick(value: CellValue) {
   }
 
   & > span:hover {
-    background: var(--head-bg);
+    // background: var(--head-bg);
+    background: #d7c9e2;
     padding-inline: 0.25rem;
   }
 }

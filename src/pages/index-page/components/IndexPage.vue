@@ -135,6 +135,7 @@ const columns = ref<TableColumn[]>([
     name: '',
     label: '',
     sortable: true,
+
     children: [
       {
         name: 'name',
@@ -155,6 +156,7 @@ const columns = ref<TableColumn[]>([
   {
     name: 'team',
     label: 'Команда',
+    sortable: true,
     children: [
       {
         name: 'description',
@@ -165,6 +167,7 @@ const columns = ref<TableColumn[]>([
   {
     name: 'team',
     label: 'Команда',
+    sortable: true,
     children: [
       {
         name: 'description',

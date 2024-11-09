@@ -39,7 +39,7 @@ function onMouseLeave() {
     @mouseleave="onMouseLeave"
   >
     <div class="main-table__head-cell-inner">
-      <span class="ellipsis-2-lines">
+      <span class="ellipsis">
         {{ _columnLabel }}
 
         <q-tooltip :delay="250">{{ _columnLabel }}</q-tooltip>
@@ -63,6 +63,7 @@ function onMouseLeave() {
 .main-table__head-cell {
   position: relative;
   text-align: left;
+  font-weight: normal;
 }
 
 .main-table__head-cell-inner {

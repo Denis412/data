@@ -69,6 +69,7 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   height: 100%;
   max-height: 100%;
   flex: 1;
+  // font-size: 0.875rem;
   color: var(--text-color);
 
   display: flex;
@@ -84,6 +85,7 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   overflow: hidden;
   background-color: #fff;
   border-radius: 1rem;
+  padding-inline: 1rem;
 }
 
 .main-table__content {
@@ -103,7 +105,97 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
 }
 
 :deep(.main-table__body-cell-inner) {
-  max-height: 64px;
-  height: 64px;
+  max-height: 70px;
+  height: 70px;
+}
+
+.main-table :deep(table) {
+  border-collapse: collapse;
+}
+
+.main-table :deep(th) {
+  padding-block: 12px;
+  text-align: left;
+  font-weight: 400;
+
+  transition-duration: var(--transition-duration);
+}
+
+.main-table :deep(tr:nth-child(even) > td) {
+  background: #fbfbff;
+}
+
+.main-table :deep(th:first-child),
+.main-table :deep(tbody td:first-child) {
+  padding-left: 16px;
+}
+
+.main-table :deep(th:last-child),
+.main-table :deep(tbody td:last-child) {
+  padding-right: 12px;
+}
+
+.main-table :deep(th:not(:first-child)),
+.main-table :deep(td:not(:first-child)) {
+  padding-left: 24px;
+}
+
+.main-table :deep(th:not(:last-child) > div),
+.main-table :deep(td:not(:last-child) > div) {
+  padding-right: 24px;
+}
+
+.main-table :deep(th:not(:last-child) > div) {
+  border-right: 1px solid #e7dcff;
+}
+
+.main-table__laptop {
+  &.main-table :deep(th:first-child),
+  &.main-table :deep(tbody td:first-child) {
+    padding-left: 12px;
+  }
+
+  &.main-table :deep(th:not(:first-child)),
+  &.main-table :deep(td:not(:first-child)) {
+    padding-left: 16px;
+  }
+
+  &.main-table :deep(th:not(:last-child) > div),
+  &.main-table :deep(td:not(:last-child) > div) {
+    padding-right: 16px;
+  }
+
+  &.main-table :deep(th:last-child),
+  &.main-table :deep(tbody td:last-child) {
+    padding-right: 12px;
+  }
+}
+
+.main-table__tablet {
+  .main-table :deep(th:not(:first-child)),
+  .main-table :deep(td:not(:first-child)) {
+    padding-left: 12px;
+  }
+
+  .main-table :deep(th:not(:last-child) > div),
+  .main-table :deep(td:not(:last-child) > div) {
+    padding-right: 12px;
+  }
+
+  .main-table :deep(th:first-child),
+  .main-table :deep(tbody td:first-child) {
+    padding-left: 8px;
+  }
+
+  .main-table :deep(th:last-child),
+  .main-table :deep(tbody td:last-child) {
+    padding-right: 8px;
+  }
+}
+
+.main-table__mobile {
+  .main-table-head-actions {
+    justify-content: flex-end;
+  }
 }
 </style>

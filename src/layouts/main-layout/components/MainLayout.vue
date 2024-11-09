@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="text-body2">
     <the-main-header @toggle-left-drawer="toggleLeftDrawer" />
     <main-drawer v-model="leftDrawerOpen" />
     <the-main-page-container />

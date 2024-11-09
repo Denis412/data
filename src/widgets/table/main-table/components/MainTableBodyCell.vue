@@ -64,6 +64,7 @@ function onClick(value: CellValue) {
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;
+  padding-top: 0.375rem;
 }
 
 .main-table__body-cell-actions {
