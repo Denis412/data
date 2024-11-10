@@ -123,10 +123,15 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   overflow: auto;
 }
 
-:deep(.main-table__body-cell-inner) {
+:deep(.main-table__body-row) {
   max-height: 70px;
   height: 70px;
 }
+
+// :deep(.main-table__body-cell-inner) {
+//   max-height: 70px;
+//   height: 70px;
+// }
 
 .main-table :deep(table) {
   border-collapse: collapse;
