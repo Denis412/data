@@ -8,12 +8,18 @@ import {
   TableTab,
   TableTabAction,
 } from '../../types';
+import { PaginatorInfo } from '@entities/api';
 
 export interface MainTableProps {
+  title: string;
   items: any[];
   tabs: TableTab[];
   columns: TableColumn[];
+  creatable?: boolean;
+  searchable?: boolean;
+  filterable?: boolean;
   rowActions?: TableRowAction[];
+  paginatorInfo?: Partial<PaginatorInfo>;
 }
 
 export interface MainTableEmits {
@@ -67,7 +73,12 @@ export interface MainTableTabItemSlots {
 export interface MainTableTabItem
   extends ComponentPublicInstance<MainTableTabItemProps> {}
 
-export interface MainTableHeaderProps {}
+export interface MainTableHeaderProps {
+  title: string;
+  creatable?: boolean;
+  searchable?: boolean;
+  filterable?: boolean;
+}
 
 export interface MainTableHeaderSlots {
   default: () => VNode[];
@@ -186,3 +197,16 @@ export interface MainTableBodyCellContentSlots {
 
 export interface MainTableBodyCellContent
   extends ComponentPublicInstance<MainTableBodyCellContentProps> {}
+
+export interface MainTableFooterProps {
+  paginatorInfo?: Partial<PaginatorInfo>;
+}
+
+export interface MainTableFooterEmits {}
+
+export interface MainTableFooterSlots {
+  default: () => VNode[];
+}
+
+export interface MainTableFooter
+  extends ComponentPublicInstance<MainTableFooterProps> {}

@@ -9,6 +9,7 @@ import {
   TableTabAction,
 } from '@widgets/table/main-table/types';
 import { ref } from 'vue';
+import { PaginatorInfo } from '@entities/api';
 
 defineOptions({
   name: 'IndexPage',
@@ -460,13 +461,25 @@ const items: any[] = [
     },
   },
 ];
+
+const paginatorInfo = ref<Partial<PaginatorInfo>>({
+  from: 1,
+  to: 50,
+  total: 145,
+  hasMorePages: true,
+});
 </script>
 
 <template>
   <q-page class="row items-center justify-evenly index-page">
     <main-table
+      title="Заказы"
+      creatable
+      searchable
+      filterable
       :items="items"
       :tabs="tabs"
+      :paginator-info="paginatorInfo"
       :columns="columns"
       :row-actions="rowActions"
       @click-body-row-cell="onClickBodyRowCell"

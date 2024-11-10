@@ -39,7 +39,17 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
     />
 
     <div class="main-table__inner">
-      <main-table-header />
+      <main-table-header
+        :title="title"
+        :creatable="creatable"
+        :searchable="searchable"
+        :filterable="filterable"
+      >
+        <template v-if="$slots.headerControls" #controls="scope">
+          <slot name="headerControls" v-bind="scope"></slot>
+        </template>
+      </main-table-header>
+
       <div class="main-table__content">
         <main-table-head :columns="columns" @sort="$emit('sort', $event)" />
         <div class="main-table__content-inner">
@@ -51,7 +61,16 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
           />
         </div>
       </div>
-      <main-table-footer />
+
+      <main-table-footer :paginator-info="paginatorInfo">
+        <template v-if="$slots.footer" v-slot="scope">
+          <slot name="footer" v-bind="scope"></slot>
+        </template>
+
+        <template v-if="$slots.footerControls" #controls="scope">
+          <slot name="footerControls" v-bind="scope"></slot>
+        </template>
+      </main-table-footer>
     </div>
   </div>
 </template>
