@@ -22,7 +22,7 @@ export /* async */ function getClientOptions(
     if (token) context.headers.authorization = `Bearer ${token}`;
     if (!headers?.space)
       context.headers.space = import.meta.env.VITE_MAIN_SPACE;
-    if (headers.space === -1 || headers.space === '-1') delete headers.space;
+    if (headers?.space === -1 || headers?.space === '-1') delete headers.space;
 
     return context;
   });

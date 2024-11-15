@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { DeepPartial } from '@shared/types';
+
 export type ApiOperation = 'get' | 'paginate' | 'create' | 'update' | 'delete';
 export type EntityRelationType = 'single' | 'multiple';
 
@@ -11,7 +13,7 @@ export type ApiOperationResult<
 > = {
   [Property in T as `${S extends true
     ? `${string & Property}${K extends 'get' | 'paginate' ? '' : Capitalize<K>}`
-    : `${K}_${string & Property}`}`]: Partial<R>;
+    : `${K}_${string & Property}`}`]: DeepPartial<R>;
 };
 
 export interface EntityRelation<T extends Record<string, any>> {

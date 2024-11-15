@@ -1,6 +1,7 @@
 <script setup lang="ts">
 /* eslint-disable */
 
+import { TypeObjectsTable } from '@widgets/table';
 import { MainTable, TableColumn, CellValue } from '@widgets/table';
 import { TypeObjectsSelect } from '@features/type-objects-select';
 import {
@@ -472,7 +473,8 @@ const paginatorInfo = ref<Partial<PaginatorInfo>>({
 
 <template>
   <q-page class="row items-center justify-evenly index-page">
-    <main-table
+    <type-objects-table />
+    <!-- <main-table
       title="Заказы"
       creatable
       searchable
@@ -486,7 +488,7 @@ const paginatorInfo = ref<Partial<PaginatorInfo>>({
       @click-tab="onClickTab"
       @click-tab-action="onClickTabAction"
       @sort="onSort"
-    />
+    /> -->
 
     <!-- <type-objects-select
       type-name="subject"

@@ -83,9 +83,7 @@ export function GetGraphqlBodyGetQuery(options: GetGraphqlBodyOptions) {
 
   return `
     query get${capitalize(typeName)}($id: String!) {
-      ${system ? typeName : `get_${typeName}`}(id: $id) {
-        ${body ?? 'id'}
-      }
+      ${system ? typeName : `get_${typeName}`}(id: $id) ${body ?? 'id'}
     }
   `;
 }
