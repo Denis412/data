@@ -6,6 +6,7 @@ import { DeepPartial } from '@shared/types';
 import { Type } from '@entities/type/types';
 
 import { MainTable, TableColumn } from '@widgets/table/main-table';
+import TableFooterControls from './TableFooterControls.vue';
 
 const {
   type,
@@ -25,7 +26,14 @@ const {
   items,
   loading: itemsLoading,
   paginatorInfo,
+  refetching,
+  refetch,
 } = useItems(type as MaybeRef<DeepPartial<Type>>, body);
+
+async function onRefetch(done: () => void) {
+  await refetch();
+  done();
+}
 
 watch(typeProperties, async (typeProperties) => {
   console.log(typeProperties);
@@ -36,7 +44,7 @@ watch(typeProperties, async (typeProperties) => {
   console.log(typeProperties[1]?.children?.[0]);
   if (!typeProperties[1]?.children?.[0]) return;
   addProperty(typeProperties[1]?.children?.[0]);
-  addProperty(typeProperties[1]?.children?.[1]);
+  // addProperty(typeProperties[1]?.children?.[1]);
 
   addProperty(typeProperties[0]);
 });
@@ -52,7 +60,11 @@ watch(typeProperties, async (typeProperties) => {
     :paginator-info="paginatorInfo"
     :loading="loading"
     :loading-items="itemsLoading"
-  />
+  >
+    <template #footerControls>
+      <table-footer-controls @refetch="onRefetch" />
+    </template>
+  </main-table>
 </template>
 
 <style scoped lang="scss"></style>

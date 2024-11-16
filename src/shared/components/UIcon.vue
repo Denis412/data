@@ -5,14 +5,9 @@ const icons = import.meta.glob('../../app/assets/icons/**/*.svg', {
 });
 
 import { ref, watch } from 'vue';
+import { UIconProps } from './types';
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  default: Boolean,
-});
+const props = defineProps<UIconProps>();
 
 const _iconRaw = ref<string | null>(null),
   _viewBox = ref('0 0 20 20'),

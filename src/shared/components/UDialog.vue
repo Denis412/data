@@ -91,16 +91,16 @@ defineExpose({
 }
 
 .u-dialog__header {
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: $primary-2;
 }
 
 .u-dialog__main {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .u-dialog__footer {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .u-dialog__content:has(.u-dialog__main) .u-dialog__header,

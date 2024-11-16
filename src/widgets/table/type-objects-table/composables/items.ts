@@ -54,14 +54,24 @@ export default function useItems(
   );
 
   const _loading = computed(() => itemsQuery?.loading.value ?? false);
+  const _refetching = ref(false);
+
+  async function refetch(variables?: PaginatorPayload) {
+    _refetching.value = true;
+    await itemsQuery?.refetch(variables);
+    _refetching.value = false;
+  }
 
   return {
     itemsQuery,
 
     items: _items,
     loading: _loading,
+    refetching: _refetching,
 
     paginatorPayload: _paginatorPayload,
     paginatorInfo: _paginatorInfo,
+
+    refetch,
   };
 }

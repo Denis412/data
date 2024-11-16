@@ -1,10 +1,11 @@
-import {
+import type { VueClasses } from '@shared/types';
+import type {
   GlobalComponentConstructor,
   QDialogProps,
   QSelectProps,
   QSpinnerProps,
 } from 'quasar';
-import { ComponentPublicInstance, VNode } from 'vue';
+import type { ComponentPublicInstance, VNode } from 'vue';
 
 export interface UDialogProps extends QDialogProps {
   close?: boolean;
@@ -65,7 +66,10 @@ export interface UCheckboxSlots {
 
 export interface UCheckbox extends ComponentPublicInstance<UCheckboxProps> {}
 
-export interface UIconProps {}
+export interface UIconProps {
+  name: string;
+  default?: boolean;
+}
 
 export interface UIconSlots {
   default: () => VNode[];
@@ -91,6 +95,24 @@ export interface ULoaderSlots {
 
 export interface ULoader extends ComponentPublicInstance<ULoaderProps> {}
 
+export interface USectionProps {
+  label?: string;
+  hLevel?: number;
+  expand?: boolean;
+  headerBg?: string | boolean;
+  contentClasses?: VueClasses;
+}
+
+export interface USectionEmits {
+  (e: 'expand', done: () => void): void;
+}
+
+export interface USectionSlots {
+  default: () => VNode[];
+}
+
+export interface USection extends ComponentPublicInstance<USectionProps> {}
+
 interface _GlobalComponents {
   UDialog: GlobalComponentConstructor<UDialogProps, UDialogSlots>;
   UInput: GlobalComponentConstructor<UInputProps, UInputSlots>;
@@ -101,6 +123,7 @@ interface _GlobalComponents {
   UIcon: GlobalComponentConstructor<UIconProps, UIconSlots>;
   UButton: GlobalComponentConstructor<UButtonProps, UButtonSlots>;
   ULoader: GlobalComponentConstructor<ULoaderProps, ULoaderSlots>;
+  USection: GlobalComponentConstructor<USectionProps, USectionSlots>;
 }
 
 declare module 'vue' {

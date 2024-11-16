@@ -1,4 +1,5 @@
 @import './fonts.scss';
+@import './animations.scss';
 
 * {
   margin: 0;
@@ -47,6 +48,10 @@ p {
 
 .opacity-1 {
   opacity: 1;
+}
+
+.expanded {
+  transform: rotate(90deg);
 }
 
 .u-menu {
