@@ -13,8 +13,8 @@ import { PaginatorInfo } from '@entities/api';
 export interface MainTableProps {
   title: string;
   items: any[];
-  tabs: TableTab[];
   columns: TableColumn[];
+  tabs?: TableTab[];
   creatable?: boolean;
   searchable?: boolean;
   filterable?: boolean;
@@ -197,6 +197,19 @@ export interface MainTableBodyCellContentSlots {
 
 export interface MainTableBodyCellContent
   extends ComponentPublicInstance<MainTableBodyCellContentProps> {}
+
+export interface MainTableBodyCellTextContentProps {
+  text: string;
+}
+
+export interface MainTableBodyCellTextContentEmits {}
+
+export interface MainTableBodyCellTextContentSlots {
+  default: () => VNode[];
+}
+
+export interface MainTableBodyCellTextContent
+  extends ComponentPublicInstance<MainTableBodyCellTextContentProps> {}
 
 export interface MainTableFooterProps {
   paginatorInfo?: Partial<PaginatorInfo>;

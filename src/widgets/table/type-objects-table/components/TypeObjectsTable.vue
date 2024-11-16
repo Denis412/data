@@ -1,9 +1,11 @@
 <script setup lang="ts">
 /* eslint-disable */
-import { toRef, watch } from 'vue';
+import { MaybeRef, watch } from 'vue';
 import { useItems, useTableType } from '../composables';
+import { DeepPartial } from '@shared/types';
+import { Type } from '@entities/type/types';
 
-// import { MainTable } from '@widgets/table/main-table';
+import { MainTable, TableColumn } from '@widgets/table/main-table';
 
 const {
   type,
@@ -15,7 +17,10 @@ const {
   addProperty,
 } = useTableType();
 
-useItems(toRef(type, 'name' as any), body);
+const { items, paginatorInfo } = useItems(
+  type as MaybeRef<DeepPartial<Type>>,
+  body
+);
 
 watch(typeProperties, async (typeProperties) => {
   console.log(typeProperties);
@@ -26,14 +31,20 @@ watch(typeProperties, async (typeProperties) => {
   console.log(typeProperties[1]?.children?.[0]);
   if (!typeProperties[1]?.children?.[0]) return;
   addProperty(typeProperties[1]?.children?.[0]);
+  addProperty(typeProperties[1]?.children?.[1]);
   addProperty(typeProperties[0]);
 });
 </script>
 
 <template>
   <div>{{ body }}</div>
-  <div>{{ itemProperties }}</div>
-  <!-- <main-table /> -->
+  <!-- <pre>{{ itemProperties }}</pre> -->
+  <main-table
+    title="Участники"
+    :columns="(itemProperties as TableColumn[])"
+    :items="items"
+    :paginator-info="paginatorInfo"
+  />
 </template>
 
 <style scoped lang="scss"></style>

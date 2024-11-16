@@ -6,6 +6,7 @@ import type {
   MainTableBodyCellContentProps,
 } from './types';
 import type { CellValue } from '../helpers';
+import MainTableBodyCellTextContent from './MainTableBodyCellTextContent.vue';
 
 defineOptions({
   name: 'MainTableBodyCellContent',
@@ -16,8 +17,9 @@ const $emit = defineEmits<MainTableBodyCellContentEmits>();
 
 const _isDisabled = computed(
   () =>
-    !Array.isArray($props.value) &&
-    (!$props.value.value || $props.value.value === 'Пусто')
+    (!Array.isArray($props.value) &&
+      (!$props.value.value || $props.value.value === 'Пусто')) ||
+    (Array.isArray($props.value) && !$props.value.length)
 );
 const _rootClasses = computed(() => ({
   'main-table__cell-content--disable': _isDisabled.value,
@@ -38,7 +40,26 @@ function onClick(value: CellValue) {
     @click.stop="onClick(value)"
   >
     <span v-if="!value.value">Пусто</span>
-    <span v-else>{{ value.value }}</span>
+    <main-table-body-cell-text-content :text="value.value" />
+  </div>
+
+  <div class="main-table__cell-array-content" v-else-if="Array.isArray(value)">
+    <div
+      v-if="!value.length"
+      class="main-table__cell-content"
+      :class="_rootClasses"
+    >
+      <span>Пусто</span>
+    </div>
+
+    <template v-else>
+      <main-table-body-cell-content
+        v-for="valueItem in value"
+        :key="valueItem.column.name"
+        :value="valueItem"
+        @click="onClick"
+      />
+    </template>
   </div>
 
   <div class="main-table__cell-array-content" v-else-if="!Array.isArray(value)">
@@ -51,15 +72,6 @@ function onClick(value: CellValue) {
       />
     </template>
   </div>
-
-  <template v-else-if="Array.isArray(value)">
-    <main-table-body-cell-content
-      v-for="valueItem in value"
-      :key="valueItem.column.name"
-      :value="valueItem"
-      @click="onClick"
-    />
-  </template>
 </template>
 
 <style scoped lang="scss">

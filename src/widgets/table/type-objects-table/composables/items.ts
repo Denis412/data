@@ -14,7 +14,7 @@ import { UseQueryReturn } from '@vue/apollo-composable';
 import { MaybeRef, ref, watch } from 'vue';
 
 export default function useItems(
-  type: MaybeRef<DeepPartial<Type>>,
+  type: MaybeRef<DeepPartial<Type>> | undefined,
   body: MaybeRef<string>
 ) {
   const _items = ref<any[]>([]);
