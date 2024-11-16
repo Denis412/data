@@ -56,6 +56,7 @@ module.exports = configure(function (/* ctx */) {
       // analyze: true,
       alias: {
         ['@app']: path.join(__dirname, './src/app'),
+        ['@css']: path.join(__dirname, './src/css'),
         ['@assets']: path.join(__dirname, './src/app/assets'),
         ['@layouts']: path.join(__dirname, './src/layouts'),
         ['@pages']: path.join(__dirname, './src/pages'),

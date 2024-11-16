@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import type { USectionEmits, USectionProps } from './types';
 import { getVueClassesObj } from '@shared/helpers';
 
@@ -12,6 +12,7 @@ const _mainInnerHeight = ref(0);
 const _expanded = ref(false);
 const _expanding = ref(false);
 
+const _rootTag = computed(() => $props.tag ?? 'section');
 const _labelTagRenderInfo = computed(() => ({
   tag: $props.hLevel ? `h${$props.hLevel}` : 'p',
   class: $props.hLevel ? `ellipsis text-h${$props.hLevel}` : 'ellipsis',
@@ -73,10 +74,23 @@ function onExpand() {
     setTimeout(() => (_expanded.value = !_expanded.value), 1);
   });
 }
+
+onMounted(() => {
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      _mainInnerHeight.value = entry.contentRect.height;
+    }
+  });
+
+  if (_mainInnerRef.value) {
+    _mainInnerHeight.value = _mainInnerRef.value.scrollHeight;
+    resizeObserver.observe(_mainInnerRef.value);
+  }
+});
 </script>
 
 <template>
-  <section class="u-section">
+  <component :is="_rootTag" class="u-section">
     <div class="u-section__header" :class="_sectionHeaderClasses">
       <component
         :is="_labelTagRenderInfo.tag"
@@ -92,16 +106,16 @@ function onExpand() {
       </u-button>
     </div>
 
-    <div class="u-section__main" :class="_sectionMainClasses">
-      <div
-        ref="_mainInnerRef"
-        class="u-section__main-inner"
-        :style="_sectionMainInnerStyles"
-      >
+    <div
+      class="u-section__main"
+      :class="_sectionMainClasses"
+      :style="_sectionMainInnerStyles"
+    >
+      <div ref="_mainInnerRef" class="u-section__main-inner">
         <slot></slot>
       </div>
     </div>
-  </section>
+  </component>
 </template>
 
 <style scoped lang="scss">
@@ -140,6 +154,9 @@ function onExpand() {
 }
 
 .u-section__main {
+  overflow: hidden;
+  transition: height 0.3s ease;
+
   & .u-section__main-inner {
     overflow: hidden;
     transition: height 0.3s ease;

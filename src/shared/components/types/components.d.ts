@@ -2,6 +2,7 @@ import type { VueClasses } from '@shared/types';
 import type {
   GlobalComponentConstructor,
   QDialogProps,
+  QInputProps,
   QSelectProps,
   QSpinnerProps,
 } from 'quasar';
@@ -26,7 +27,9 @@ export interface UDialog extends ComponentPublicInstance<UDialogProps> {
   closeDialog: () => void;
 }
 
-export interface UInputProps {}
+export interface UInputProps extends QInputProps {
+  required?: boolean;
+}
 
 export interface UInputSlots {
   default: () => VNode[];
@@ -96,6 +99,7 @@ export interface ULoaderSlots {
 export interface ULoader extends ComponentPublicInstance<ULoaderProps> {}
 
 export interface USectionProps {
+  tag?: string;
   label?: string;
   hLevel?: number;
   expand?: boolean;
