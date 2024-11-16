@@ -64,8 +64,23 @@ defineExpose({
     }
   }
 
+  & :deep(.q-field__counter) {
+    padding-right: 1rem;
+  }
+
   & :deep(input) {
     @extend .text-body2;
+    color: $violet-8;
+    padding: 0;
+
+    &::placeholder {
+      color: $gray-5;
+    }
+  }
+
+  & :deep(textarea) {
+    @extend .text-body2;
+    padding: 1rem 0 !important;
     color: $violet-8;
     padding: 0;
 
@@ -95,6 +110,14 @@ defineExpose({
   }
 
   & :deep(input) {
+    color: $gray-3;
+
+    &::placeholder {
+      color: $gray-3;
+    }
+  }
+
+  & :deep(textarea) {
     color: $gray-3;
 
     &::placeholder {
@@ -138,5 +161,16 @@ defineExpose({
 
 :deep(.q-field__bottom--animated) {
   transform: translateY(0);
+}
+
+.q-textarea :deep(.q-field__control) {
+  --textarea-height: 124px;
+  height: var(--textarea-height);
+  max-height: var(--textarea-height);
+
+  & textarea {
+    max-height: var(--textarea-height);
+    overflow: auto;
+  }
 }
 </style>

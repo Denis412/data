@@ -17,7 +17,7 @@ function onExpand(done: () => void) {
     <template #default>
       <q-form @submit="onSubmit">
         <u-section label="Видимые поля" expand @expand="onExpand">
-          <u-input placeholder="Введите что-то" required />
+          <u-input placeholder="Введите что-то" />
         </u-section>
       </q-form>
     </template>
