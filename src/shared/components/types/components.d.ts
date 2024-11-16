@@ -1,4 +1,9 @@
-import { GlobalComponentConstructor, QDialogProps, QSelectProps } from 'quasar';
+import {
+  GlobalComponentConstructor,
+  QDialogProps,
+  QSelectProps,
+  QSpinnerProps,
+} from 'quasar';
 import { ComponentPublicInstance, VNode } from 'vue';
 
 export interface UDialogProps extends QDialogProps {
@@ -76,6 +81,16 @@ export interface UButtonSlots {
 
 export interface UButton extends ComponentPublicInstance<UButtonProps> {}
 
+export interface ULoaderProps extends QSpinnerProps {
+  text?: string;
+}
+
+export interface ULoaderSlots {
+  default: () => VNode[];
+}
+
+export interface ULoader extends ComponentPublicInstance<ULoaderProps> {}
+
 interface _GlobalComponents {
   UDialog: GlobalComponentConstructor<UDialogProps, UDialogSlots>;
   UInput: GlobalComponentConstructor<UInputProps, UInputSlots>;
@@ -85,6 +100,7 @@ interface _GlobalComponents {
   UCheckbox: GlobalComponentConstructor<UCheckboxProps, UCheckboxSlots>;
   UIcon: GlobalComponentConstructor<UIconProps, UIconSlots>;
   UButton: GlobalComponentConstructor<UButtonProps, UButtonSlots>;
+  ULoader: GlobalComponentConstructor<ULoaderProps, ULoaderSlots>;
 }
 
 declare module 'vue' {

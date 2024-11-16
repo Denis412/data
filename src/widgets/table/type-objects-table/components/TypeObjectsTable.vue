@@ -9,18 +9,23 @@ import { MainTable, TableColumn } from '@widgets/table/main-table';
 
 const {
   type,
+  typeQuery,
   typeProperties,
   body,
+  loading,
   gqlBody,
   itemProperties,
   expandProperty,
   addProperty,
 } = useTableType();
 
-const { items, paginatorInfo } = useItems(
-  type as MaybeRef<DeepPartial<Type>>,
-  body
-);
+console.log('loa', loading);
+
+const {
+  items,
+  loading: itemsLoading,
+  paginatorInfo,
+} = useItems(type as MaybeRef<DeepPartial<Type>>, body);
 
 watch(typeProperties, async (typeProperties) => {
   console.log(typeProperties);
@@ -32,6 +37,7 @@ watch(typeProperties, async (typeProperties) => {
   if (!typeProperties[1]?.children?.[0]) return;
   addProperty(typeProperties[1]?.children?.[0]);
   addProperty(typeProperties[1]?.children?.[1]);
+
   addProperty(typeProperties[0]);
 });
 </script>
@@ -44,6 +50,8 @@ watch(typeProperties, async (typeProperties) => {
     :columns="(itemProperties as TableColumn[])"
     :items="items"
     :paginator-info="paginatorInfo"
+    :loading="loading"
+    :loading-items="itemsLoading"
   />
 </template>
 

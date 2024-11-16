@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  GetPayload,
-  GetResult,
   paginateEntity,
   PaginatorInfo,
   PaginatorPayload,
@@ -11,7 +9,7 @@ import {
 import { Type } from '@entities/type/types';
 import { DeepPartial } from '@shared/types';
 import { UseQueryReturn } from '@vue/apollo-composable';
-import { MaybeRef, ref, watch } from 'vue';
+import { computed, MaybeRef, ref, watch } from 'vue';
 
 export default function useItems(
   type: MaybeRef<DeepPartial<Type>> | undefined,
@@ -24,10 +22,9 @@ export default function useItems(
   });
   const _paginatorInfo = ref<PaginatorInfo>();
 
-  const typeQuery =
-    ref<UseQueryReturn<GetResult<'type', true, Type>, GetPayload>>();
-  const itemsQuery =
-    ref<UseQueryReturn<PaginatorResult<'', false, any>, PaginatorPayload>>();
+  let itemsQuery:
+    | UseQueryReturn<PaginatorResult<'', false, any>, PaginatorPayload>
+    | undefined;
 
   watch(
     [type, body],
@@ -35,14 +32,14 @@ export default function useItems(
       if (!type || !body) return;
       const typeName = (type as DeepPartial<Type>).name as string;
 
-      itemsQuery.value = paginateEntity(
+      itemsQuery = paginateEntity(
         typeName as any,
         false,
         _paginatorPayload as any,
         (body as string) ?? '{ id }'
       );
 
-      itemsQuery.value?.onResult((itemsResult) => {
+      itemsQuery?.onResult((itemsResult) => {
         if (!itemsResult.data) return;
 
         const itemsData = itemsResult.data as any;
@@ -56,46 +53,13 @@ export default function useItems(
     { immediate: true }
   );
 
-  // watch(
-  //   () => $route.query.typeId,
-  //   (typeId) => {
-  //     typeQuery.value = getType(
-  //       { id: typeId as string },
-  //       '{ id name label properties { id name label multiple { status } meta } }'
-  //     );
-
-  //     typeQuery.value?.onResult((queryResult) => {
-  //       if (!queryResult.data) return;
-
-  //       const typeName = queryResult.data.type.name as string;
-
-  //       itemsQuery.value = paginateEntity(
-  //         typeName,
-  //         false,
-  //         _paginatorPayload as any,
-  //         body ?? '{ id }'
-  //       );
-
-  //       itemsQuery.value?.onResult((itemsResult) => {
-  //         if (!itemsResult.data) return;
-
-  //         const itemsData = itemsResult.data as any;
-  //         const paginateResult =
-  //           itemsData[typeName] ?? itemsData[`paginate_${typeName}`];
-
-  //         _items.value = paginateResult.data;
-  //         _paginatorInfo.value = paginateResult.paginatorInfo;
-  //       });
-  //     });
-  //   },
-  //   { immediate: true }
-  // );
+  const _loading = computed(() => itemsQuery?.loading.value ?? false);
 
   return {
-    typeQuery,
     itemsQuery,
 
     items: _items,
+    loading: _loading,
 
     paginatorPayload: _paginatorPayload,
     paginatorInfo: _paginatorInfo,

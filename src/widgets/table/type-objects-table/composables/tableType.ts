@@ -12,8 +12,9 @@ import { getGraphqlBodyWithProps } from '../helpers';
 export default function useTableType() {
   const $route = useRoute();
 
-  const typeQuery =
-    ref<UseQueryReturn<GetResult<'type', true, Type>, GetPayload>>();
+  let typeQuery:
+    | UseQueryReturn<GetResult<'type', true, Type>, GetPayload>
+    | undefined;
 
   const _type = ref<DeepPartial<Type>>();
   const _typeProperties = ref<DeepPartial<TypeTableProperty>[]>([]);
@@ -36,12 +37,12 @@ export default function useTableType() {
     (typeId) => {
       if (!typeId) return;
 
-      typeQuery.value = getType(
+      typeQuery = getType(
         { id: typeId as string },
         '{ id name properties { name label data_type meta } }'
       );
 
-      typeQuery.value?.onResult((typeResult) => {
+      typeQuery?.onResult((typeResult) => {
         if (!typeResult.data) return;
         _type.value = typeResult.data.type;
 
@@ -53,6 +54,8 @@ export default function useTableType() {
     },
     { immediate: true }
   );
+
+  const _loading = computed(() => typeQuery?.loading.value ?? false);
 
   function mapTypePropertyToTableProperty(
     property?: DeepPartial<Property>
@@ -149,6 +152,8 @@ export default function useTableType() {
 
   return {
     typeQuery,
+
+    loading: _loading,
 
     type: _type,
     typeProperties: _typeProperties,

@@ -15,6 +15,8 @@ export interface MainTableProps {
   items: any[];
   columns: TableColumn[];
   tabs?: TableTab[];
+  loading?: boolean;
+  loadingItems?: boolean;
   creatable?: boolean;
   searchable?: boolean;
   filterable?: boolean;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable  */
 
 /* TYPES */
 import type { MainTableEmits, MainTableProps } from './types';
@@ -51,15 +51,36 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
       </main-table-header>
 
       <div class="main-table__content">
-        <main-table-head :columns="columns" @sort="$emit('sort', $event)" />
-        <div class="main-table__content-inner">
-          <main-table-body
-            :items="items"
-            :columns="columns"
-            :row-actions="rowActions"
-            @click-row-cell="onClickBodyRowCell"
+        <div v-if="loading" class="main-table__loader-container">
+          <u-loader
+            color="primary"
+            size="5em"
+            :thickness="1"
+            text="Загрузка данных..."
           />
         </div>
+
+        <template v-else>
+          <main-table-head :columns="columns" @sort="$emit('sort', $event)" />
+          <div class="main-table__content-inner">
+            <div v-if="loadingItems" class="main-table__loader-container">
+              <u-loader
+                color="primary"
+                size="5em"
+                :thickness="1"
+                text="Загрузка элементов..."
+              />
+            </div>
+
+            <main-table-body
+              v-else
+              :items="items"
+              :columns="columns"
+              :row-actions="rowActions"
+              @click-row-cell="onClickBodyRowCell"
+            />
+          </div>
+        </template>
       </div>
 
       <main-table-footer :paginator-info="paginatorInfo">
@@ -114,12 +135,21 @@ function onClickBodyRowCell(item: any, value: CellValue, column: TableColumn) {
   overflow: hidden;
 }
 
+.main-table__loader-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 :deep(.main-table__content table) {
   width: 100%;
   table-layout: fixed;
 }
 
 .main-table__content-inner {
+  height: 100%;
   overflow: auto;
 }
 
