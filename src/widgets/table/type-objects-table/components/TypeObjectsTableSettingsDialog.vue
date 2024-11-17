@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useFormValidation } from '@shared';
 import { RangeInput, DatetimeInput, SearchInput } from '@features/inputs';
+import { ref } from 'vue';
 
 const $model = defineModel<boolean>();
 
+const sel = ref();
 const { required } = useFormValidation();
 
 function onSubmit() {
@@ -23,6 +25,12 @@ function onExpand(done: () => void) {
       <q-form @submit="onSubmit">
         <u-section label="Секция первая" expand @expand="onExpand">
           <u-input placeholder="Введите что-то" required :rules="[required]" />
+          <u-select
+            v-model="sel"
+            :options="['hello', 'world', '!']"
+            use-input
+            placeholder="Placeholder"
+          />
           <range-input />
           <datetime-input />
           <search-input :rules="[required]" />

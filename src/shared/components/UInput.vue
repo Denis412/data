@@ -82,7 +82,7 @@ defineExpose({
   & :deep(.q-field__append) {
     padding-left: 0.5rem;
 
-    & .base-icon {
+    & .u-icon {
       font-size: 0.875rem;
     }
   }

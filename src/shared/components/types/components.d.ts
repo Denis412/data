@@ -6,10 +6,19 @@ import type {
   GlobalComponentConstructor,
   QDialogProps,
   QInputProps,
+  QSelect,
   QSelectProps,
   QSpinnerProps,
 } from 'quasar';
 import type { ComponentPublicInstance, VNode } from 'vue';
+
+export interface USelectVirtualScrollDetails {
+  index: number;
+  from: number;
+  to: number;
+  direction: 'increase' | 'decrease';
+  ref: QSelect;
+}
 
 export interface UDialogProps extends QDialogProps {
   close?: boolean;
@@ -46,6 +55,9 @@ export interface UInput extends ComponentPublicInstance<UInputProps> {
 }
 
 export interface USelectProps extends QSelectProps {}
+export interface USelectEmits {
+  (e: 'virtualScroll', details: USelectVirtualScrollDetails): void;
+}
 
 export interface USelectSlots {
   default: () => VNode[];
