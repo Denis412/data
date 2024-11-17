@@ -54,14 +54,14 @@ watch(
     :[_colorAttribute]="'currentColor'"
     width="1em"
     height="1em"
-    class="base-icon"
+    class="u-icon"
     v-html="_iconRaw"
   ></svg>
 </template>
 
 <style scoped lang="scss">
-.base-icon {
-  color: inherit;
+.u-icon {
+  color: currentColor;
   font-size: 20px;
 }
 </style>

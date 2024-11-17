@@ -1,16 +1,30 @@
 <script setup lang="ts">
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* TYPES */
 import { ref } from 'vue';
 import type { UInputProps, UInputModel } from './types';
 import { QInput } from 'quasar';
+import { formatDischargeNumberString } from '@shared/helpers';
 
-defineProps<UInputProps>();
+const $props = defineProps<UInputProps>();
 
 const $model = defineModel<UInputModel>('');
 const _rootRef = ref<QInput>();
 
-function validate() {
-  _rootRef.value?.validate();
+function validate(value?: any) {
+  return _rootRef.value?.validate(value);
+}
+
+function onUpdateModelValue(value: string | number | null) {
+  let _value = value;
+
+  if ($props.modelModifiers?.num) {
+    _value = formatDischargeNumberString((value as string).replaceAll(' ', ''));
+    console.log('num model', value);
+  }
+
+  $model.value = _value;
 }
 
 defineExpose({
@@ -22,11 +36,16 @@ defineExpose({
   <q-input
     ref="_rootRef"
     v-bind="$props"
-    v-model="$model"
+    :model-value="$model"
+    @update:model-value="onUpdateModelValue"
     outlined
     no-error-icon
     class="u-input"
   >
+    <template v-if="$slots.prepend" #prepend>
+      <slot name="prepend"></slot>
+    </template>
+
     <template v-if="$slots.append || required" #append>
       <slot name="append">
         <u-icon name="star" />
@@ -56,11 +75,23 @@ defineExpose({
     }
   }
 
+  & :deep(.u-icon) {
+    transition-duration: 0.3s;
+  }
+
   & :deep(.q-field__append) {
     padding-left: 0.5rem;
 
     & .base-icon {
       font-size: 0.875rem;
+    }
+  }
+
+  & :deep(.q-field__marginal) {
+    font-size: 1rem;
+
+    & .u-icon {
+      font-size: 1rem;
     }
   }
 
@@ -90,13 +121,13 @@ defineExpose({
   }
 }
 
-.q-field--outlined:hover :deep(.q-field__control) {
+.u-input.q-field--outlined:hover :deep(.q-field__control) {
   &::after {
     border: 1px solid #c7adff;
   }
 }
 
-.q-field--focused :deep(.q-field__control) {
+.u-input.q-field--focused :deep(.q-field__control) {
   background-color: #f9f6ff !important;
 
   &::after {
@@ -104,7 +135,7 @@ defineExpose({
   }
 }
 
-.q-field--disabled :deep(.q-field__control) {
+.u-input.q-field--disabled :deep(.q-field__control) {
   &::before {
     border: 1px solid $primary-2;
   }
@@ -126,26 +157,26 @@ defineExpose({
   }
 }
 
-.q-field--disabled:hover :deep(.q-field__control) {
+.u-input.q-field--disabled:hover :deep(.q-field__control) {
   &::after {
     border: 1px solid $primary-2;
   }
 }
 
-.q-field--error:hover :deep(.q-field__control) {
+.u-input.q-field--error:hover :deep(.q-field__control) {
   &::after {
     border: 1px solid $negative;
   }
 }
 
-.q-field--error :deep(.q-field__control) {
+.u-input.q-field--error :deep(.q-field__control) {
   &::after {
     border: 1px solid $negative;
   }
 }
 
-.q-field--error :deep(.q-field__append) {
-  .base-icon {
+.u-input.q-field--error :deep(.q-field__append) {
+  .u-icon {
     color: $negative;
   }
 }
@@ -163,7 +194,7 @@ defineExpose({
   transform: translateY(0);
 }
 
-.q-textarea :deep(.q-field__control) {
+.u-input.q-textarea :deep(.q-field__control) {
   --textarea-height: 124px;
   height: var(--textarea-height);
   max-height: var(--textarea-height);

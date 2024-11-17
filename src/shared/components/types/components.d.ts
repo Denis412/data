@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { VueClasses } from '@shared/types';
 import type {
+  ComponentConstructor,
   GlobalComponentConstructor,
   QDialogProps,
   QInputProps,
@@ -28,14 +31,19 @@ export interface UDialog extends ComponentPublicInstance<UDialogProps> {
 }
 
 export interface UInputProps extends QInputProps {
+  modelModifiers?: Record<string, boolean>;
   required?: boolean;
 }
 
 export interface UInputSlots {
   default: () => VNode[];
+  prepend: () => VNode[];
+  append: () => VNode[];
 }
 
-export interface UInput extends ComponentPublicInstance<UInputProps> {}
+export interface UInput extends ComponentPublicInstance<UInputProps> {
+  validate: (value?: any) => boolean | Promise<boolean>;
+}
 
 export interface USelectProps extends QSelectProps {}
 
@@ -141,3 +149,5 @@ declare module '@vue/runtime-dom' {
 declare module 'vue' {
   interface GlobalComponents extends _GlobalComponents {}
 }
+
+export const UInput: ComponentConstructor<UInput>;

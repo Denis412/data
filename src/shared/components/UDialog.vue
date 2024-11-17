@@ -47,7 +47,9 @@ defineExpose({
         </div>
 
         <div v-if="$slots.default" class="u-dialog__main">
-          <slot>Main</slot>
+          <div style="overflow: auto">
+            <slot>Main</slot>
+          </div>
         </div>
 
         <div v-if="$slots.footer" :close="onClose" class="u-dialog__footer">
@@ -64,6 +66,9 @@ defineExpose({
 }
 
 .u-dialog__inner {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   position: relative;
   width: 100%;
 }
@@ -87,7 +92,10 @@ defineExpose({
 }
 
 .u-dialog__content {
+  display: flex;
+  flex-direction: column;
   border-radius: 1rem;
+  overflow: hidden;
 }
 
 .u-dialog__header {
@@ -96,6 +104,8 @@ defineExpose({
 }
 
 .u-dialog__main {
+  flex: 1;
+  overflow: auto;
   padding: 1rem;
 }
 
