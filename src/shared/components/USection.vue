@@ -59,6 +59,8 @@ function updateContentHeight() {
 }
 
 function onExpand() {
+  if (_expanding.value) return;
+
   updateContentHeight();
   if (_expanded.value) {
     _expanded.value = !_expanded.value;

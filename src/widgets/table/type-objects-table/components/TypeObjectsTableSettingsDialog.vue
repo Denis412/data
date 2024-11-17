@@ -13,7 +13,7 @@ function onSubmit() {
 function onExpand(done: () => void) {
   setTimeout(() => {
     done();
-  }, 0);
+  }, 500);
 }
 </script>
 
