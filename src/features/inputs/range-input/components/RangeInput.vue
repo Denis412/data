@@ -44,6 +44,21 @@ const _rootClasses = computed(() => ({
   'range-input--error': _isError.value,
 }));
 
+async function bothValidate() {
+  await nextTick();
+
+  const leftValidateResult = await _leftInputRef.value?.validate();
+  const rightValidateResult = await _rightInputRef.value?.validate();
+
+  if (!leftValidateResult || !rightValidateResult) {
+    _isError.value = true;
+    return false;
+  }
+
+  _isError.value = false;
+  return true;
+}
+
 function onFocus() {
   setTimeout(() => (_isFocused.value = true));
 }
@@ -53,24 +68,8 @@ function onBlur() {
   bothValidate();
 }
 
-async function validate() {
-  return (
-    (await _leftInputRef.value?.validate()) &&
-    (await _rightInputRef.value?.validate())
-  );
-}
-
-function bothValidate() {
-  let leftValidateResult: boolean | undefined;
-  let rightValidateResult: boolean | undefined;
-
-  nextTick(async () => {
-    leftValidateResult = await _leftInputRef.value?.validate();
-    rightValidateResult = await _rightInputRef.value?.validate();
-
-    if (!leftValidateResult || !rightValidateResult) _isError.value = true;
-    else _isError.value = false;
-  });
+function validate() {
+  return bothValidate();
 }
 
 watch([$leftModel, $rightModel], bothValidate);
